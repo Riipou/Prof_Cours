@@ -99,7 +99,9 @@ class ProfCoursTest extends TestCase
             * Question 7 : Insérer les enregistrements suivantes dans la table cours
             *
             */
-
+            new Cours("IoT", "10", 1),       
+            new Cours("IA", "12", 3),     
+            new Cours("EDL", "5", 6), 
         ];
         
     }
@@ -180,7 +182,10 @@ class ProfCoursTest extends TestCase
         foreach (self::$cours_a as $cours) {
             $cours->add($conn);
         }
-        
+        $expected = count(self::$cours_a);
+        $num_records = Prof::count($conn);
+        $this->assertEquals($expected, $num_records, "Enregistrement des cours ...\n");
+        $this->assertCount($num_records, self::$cours_a, "Enregistrement des cours ...\n");
         /**
         *
         * Question 8 : Dans la fonction « testAdd() », s’inspirer de test d’ajout des profs pour tester l’ajout des cours.   
